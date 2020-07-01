@@ -1,4 +1,4 @@
-##react-hooks-chat-app<br />
+# react-hooks-chat-app<br />
 概要：react hooksを利用したチャットの内容をリアルタイムで通訳するアプリケーションです。<br />
 通常のチャット機能に加え、チャットの内容を通訳してくれます。<br />
 また、ログインしなくても利用出来ます。<br />
@@ -6,14 +6,14 @@
 ブラウザのタブを二つ用意し、メッセージを送信いただくとリアルタイムで受信されるのを確認することができます。<br />
 また、データが永続化されるため、いつでも確認可能です。<br />
 <br />
-##機能一覧：<br />
+# 機能一覧：<br />
 ・googleログイン機能（firebase）<br />
 ・テキスト通訳機能（firebase Extension）<br />
 ・リアルタイムアップデート（firebase onSnapshot()メソッド）<br />
 ・メッセージの永続化（firebase firestore）<br />
 ・チャット機能<br />
 
-##ソフトウェア構成<br />
+# ソフトウェア構成<br />
     react: 16.13.1,<br />
     react-dom: 16.13.1,<br />
     react-scripts: 3.4.1<br />
