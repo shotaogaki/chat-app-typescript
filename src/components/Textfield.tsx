@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
@@ -16,14 +16,14 @@ export default function TextField() {
             <React.Fragment >
                 <CssBaseline />
                 <Container fixed>
-                <Typography component="div" style={{ position: 'relative', backgroundColor: '#ffffff', height: '80vh', marginTop: '50px', boxShadow: '2px 2px 4px gray'}} >
-                    <div id='messages' style={{overflow: 'scroll', height: '90%'}}></div>
-                    <form  onSubmit={e => handleMessage(e)}style={{ position: 'absolute', bottom: '10px', width: '100%'}}>
-                        <input id='nameInput' placeholder='name...' style={{width: '10%'}}></input>
-                        <input id='messageInput' placeholder='messages...' style={{width: '60%'}}></input>
-                        <button type='submit' id='msgSubmitBtn'>Send</button>
-                    </form>
-                </Typography>
+                    <Typography component="div" style={{ position: 'relative', backgroundColor: '#ffffff', height: '80vh', marginTop: '50px', boxShadow: '2px 2px 4px gray'}} >
+                        <div id='messages' style={{overflow: 'scroll', height: '90%'}}></div>
+                        <form  onSubmit={e => handleMessage(e)}style={{ position: 'absolute', bottom: '10px', width: '100%'}}>
+                            <input id='nameInput' placeholder='name...' style={{width: '10%'}}></input>
+                            <input id='messageInput' placeholder='messages...' style={{width: '60%'}}></input>
+                            <button type='submit' id='msgSubmitBtn'>Send</button>
+                        </form>
+                    </Typography>
                 </Container>
           </React.Fragment>
         );
@@ -64,6 +64,16 @@ export default function TextField() {
         } 
     }
 
+    const deleteMessage = (id: string) => {
+        console.log("delete");
+        firebase.firestore().collection('messages').doc(id).delete().then(function() {
+            console.log("Document successfully deleted!");
+            window.location.reload(true);
+        }).catch(function(error) {
+            console.error("Error removing document: ", error);
+        });
+    }
+
     const loadMessages = () => {
         firebase.firestore().collection('messages').orderBy('timestamp')
           .get()
@@ -81,8 +91,9 @@ export default function TextField() {
                     '<img class="pic" style=" width: 30px; border-radius: 50%; margin-right: 10px;"/>'+
                 '</div>' +
                 '<div>'+
-                '<div class="name" style=" font-size: 16px;text-align: start; line-height: 30px;"></div>'+
-                '<div class="message" style="font-size: 24px; font-weight: bold; "></div>' +
+                    '<div class="name" style=" font-size: 16px;text-align: start; line-height: 30px;"></div>'+
+                    '<div class="message" style="font-size: 24px; font-weight: bold; "></div>' +
+                    '<button style="background-color: white;" class="deleteButton">Delete</button>'+
                 '</div>' +
             '</div>';
         let div = document.getElementById(id) as HTMLDivElement;
@@ -105,15 +116,17 @@ export default function TextField() {
         let messageElement = div.querySelector('.message')!;
 
         if (transMsg) {
-            messageElement.textContent = `${transMsg.ja}
-                                          ${transMsg.en}
-                                          ${transMsg.zh}`;
+            messageElement.textContent = `Jp: ${transMsg.ja}
+                                          En:  ${transMsg.en}
+                                          Ch:  ${transMsg.zh}`;
             messageElement.innerHTML = messageElement.innerHTML.replace(/\n/g, '<br>');
         }
-
+        const detBtn = div.querySelector('.deleteButton') as HTMLButtonElement;
+        detBtn.onclick = function() {deleteMessage(id)};
         let element = document.getElementById('messages')!;
         let bottom = element.scrollHeight - element.clientHeight;
         element.scroll(0, bottom);
+       
     }
 
     const observeMessages = () => {

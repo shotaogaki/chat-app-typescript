@@ -1,5 +1,5 @@
-import React, { Component } from 'react'; 
-import firebase, { functions } from 'firebase/app';
+import React from 'react'; 
+import firebase from 'firebase/app';
 import 'firebase/firestore';
 import config from '../config/firebase-config';
 import Header from "./Header";
