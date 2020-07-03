@@ -4,13 +4,14 @@
 また、ログインしなくても利用出来ます。<br />
 日常の中で英語に触れるチャンスを増やすことで英語の上達を目的としたアプリケーションです。<br />
 ブラウザのタブを二つ用意し、メッセージを送信いただくとリアルタイムで受信されるのを確認することができます。<br />
-また、データが永続化されるため、いつでも確認可能です。<br />
+データが永続化されるため、いつでも確認可能です。<br />
 <br />
 <img src="./sample2.png" width="400px"><img src="./sample1.png" width="400px">
 # 機能一覧：<br />
 ・googleログイン機能（firebase）<br />
 ・テキスト通訳機能（firebase Extension）<br />
 ・リアルタイムアップデート（firebase onSnapshot()メソッド）<br />
+・メッセージ削除機能（firebase firestore）<br />
 ・メッセージの永続化（firebase firestore）<br />
 ・チャット機能<br />
 
